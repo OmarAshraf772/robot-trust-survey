@@ -34,7 +34,7 @@
     // Append participant ID as a query parameter (Google Forms supports prefilled fields)
     // Example: ...?entry.1234567890=P654321
     // Replace entry.XXXXXX with your actual prefill parameter ID from Google Forms (see below)
-    const FINAL_URL = assignedForm + "?usp=pp_url&entry.1234567890=" + participantID;
+    const FINAL_URL = assignedForm; //+ "?usp=pp_url&entry.1234567890=" + participantID;
 
     // Redirect after short delay
     setTimeout(() => {
