@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robot Explanation Study</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 10%;
+      background-color: #fafafa;
+    }
+    .msg {
+      font-size: 1.2em;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="msg">Redirecting you to your assigned survey form...</div>
+
+  <script>
+    // === CONFIGURATION ===
+    const FORM_A_URL = "https://youtube.com/shorts/NttMenB45q4";
+    const FORM_B_URL = "https://youtube.com/shorts/kmh8unOr1zI";
+
+    // Generate a unique participant ID
+    const participantID = "P" + Math.floor(100000 + Math.random() * 900000); // e.g., P654321
+
+    // Randomly assign form
+    const assignedForm = Math.random() < 0.5 ? FORM_A_URL : FORM_B_URL;
+
+    // Append participant ID as a query parameter (Google Forms supports prefilled fields)
+    // Example: ...?entry.1234567890=P654321
+    // Replace entry.XXXXXX with your actual prefill parameter ID from Google Forms (see below)
+    const FINAL_URL = assignedForm + "?usp=pp_url&entry.1234567890=" + participantID;
+
+    // Redirect after short delay
+    setTimeout(() => {
+      window.location.href = FINAL_URL;
+    }, 1500);
+  </script>
+</body>
+</html>
