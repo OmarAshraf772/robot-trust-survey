@@ -7,34 +7,52 @@
   <style>
     body {
       font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      color: #222;
       text-align: center;
       padding-top: 10%;
-      background-color: #fafafa;
     }
-    .msg {
-      font-size: 1.2em;
-      color: #333;
+    h1 {
+      color: #c62828;
     }
   </style>
 </head>
 <body>
-  <div class="msg">Redirecting you to your assigned survey form...</div>
+  <h1>Redirecting you to your assigned survey...</h1>
+  <p>Please wait a few seconds.</p>
 
   <script>
     // === CONFIGURATION ===
-    const FORM_A_URL = "https://youtube.com/shorts/NttMenB45q4";
-    const FORM_B_URL = "https://youtube.com/shorts/kmh8unOr1zI";
+    const FORM_LINKS = [
+      {
+        url: "https://docs.google.com/forms/d/e/1FAIpQLSdMQx3j2B-SRks67ujSKkkbls1FLR305vSGexAtSYH-kjdijg/viewform?usp=header",
+        entry: "entry.1662872526", // Pre-1
+      },
+      {
+        url: "https://docs.google.com/forms/d/e/1FAIpQLSd9mjQgep8UCmcV3wDw0JN4jMCZeF4JLKfKzvJkeYRSYrXv5w/viewform?usp=header",
+        entry: "entry.1662872526", // Post-1
+      },
+      {
+        url: "https://docs.google.com/forms/d/e/1FAIpQLSeY9e7ER_-4Im4zxyOqR7DOn5Hq7vvXNCMD2qMKfHBCpqgwHg/viewform?usp=header",
+        entry: "entry.1662872526", // Pre-2
+      },
+      {
+        url: "https://docs.google.com/forms/d/e/1FAIpQLSdQKj1Byb5LHh7RuOFlWGMFThC7mv02UilP3UJWHsHlmFHtsw/viewform?usp=header",
+        entry: "entry.1662872526", // Post-2
+      },
+    ];
 
-    // Generate a unique participant ID
-    const participantID = "P" + Math.floor(100000 + Math.random() * 900000); // e.g., P654321
+    // Generate unique participant ID
+    const participantID = "P" + Math.floor(100000 + Math.random() * 900000);
 
-    // Randomly assign form
-    const assignedForm = Math.random() < 0.5 ? FORM_A_URL : FORM_B_URL;
+    // Randomly pick one of the 4 forms (equal probability)
+    const assigned = FORM_LINKS[Math.floor(Math.random() * FORM_LINKS.length)];
 
-    // Append participant ID as a query parameter (Google Forms supports prefilled fields)
-    // Example: ...?entry.1234567890=P654321
-    // Replace entry.XXXXXX with your actual prefill parameter ID from Google Forms (see below)
-    const FINAL_URL = assignedForm; //+ "?usp=pp_url&entry.1234567890=" + participantID;
+    // Build the final redirect URL with participant ID prefilled
+    const FINAL_URL = `${assigned.url}?usp=pp_url&${assigned.entry}=${participantID}`;
+
+    // Optional: log assignment (for debugging)
+    console.log("Assigned form:", FINAL_URL);
 
     // Redirect after short delay
     setTimeout(() => {
